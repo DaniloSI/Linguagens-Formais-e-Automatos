@@ -96,16 +96,3 @@ class FileReadAF:
 		
 		# Retorna o AFN.
 		return AFN(alfabeto, estados, estadosFinais, estadoInicial, palavra, transicoes)
-
-'''
-def main():
-	
-	leitor = FileReadAF("teste.txt", FileReadAF.AFN)
-	
-	leitor.getAF().executaAutomato()
-	
-	return 0
-	
-if __name__ == "__main__":
-	main()
-'''
