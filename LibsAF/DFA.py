@@ -1,46 +1,44 @@
 class DFA:
-   def __init__(self, processaSimbolo = None):
-      self.estados = []
-      self.alfabeto = set([])
-      self.transicao = {}
-      self.estadoInicial = None
-      self.estadosFinais = []
-      
-      if processaSimbolo:
-         self.processaSimbolo = processaSimbolo
-      else:
-         self.processaSimbolo = lambda x: x
+	
+	
+	
+	
+	def __init__(self):
+		self.estados = set()
+		self.alfabeto = set()
+		self.transicao = {}
+		self.estadoInicial = ""
+		self.estadosFinais = set()
 
-   def adiciona_estado(self, nome, transicao, st_inic=0, st_final=0):
-      self.estados.append(nome)
-      self.transicao[nome] = transicao
-      simbolos = set(transicao.keys())
-      self.alfabeto = self.alfabeto.union(simbolos)
-      
-      if st_inic:
-         self.estadoInicial = nome
-      if st_final:
-         self.estadosFinais.append(nome)
+	def addEstado(self, nomeEstado, transicao, stInic=0, stFinal=0):
+	
+		self.estados.add(nomeEstado)
+		self.transicao[nomeEstado] = transicao
+		simbolos = set( transicao.keys() )
+		self.alfabeto = self.alfabeto.union(simbolos)
 
-   def executa(self, sentenca):
-	   
-      if not self.estadoInicial:
-         raise ("Initialization Error", "deve existir um estado inicial")
-      if not self.estadosFinais:
-         raise ("Initialization Error", "deve existir pelo menos um estado final")
+		if stInic:
+			self.estadoInicial = nomeEstado
+		if stFinal:
+			self.estadosFinais.add(nomeEstado)
 
-      estadoAtual = self.estadoInicial
+	def executaAutomato(self, sentenca):
+		 
+		if self.estadoInicial == "":
+			raise ("Initialization Error", "deve existir um estado inicial")
+		if len(self.estadosFinais) == 0:
+			raise ("Initialization Error", "deve existir pelo menos um estado final")
 
-      for simbolo in sentenca:
-         simbolo = self.processaSimbolo(simbolo)
-         
-         try:
-            estadoAtual = self.transicao[estadoAtual][simbolo]
-         except KeyError:
-            print ("A sentenca '" + sentenca + "' nao foi reconhecida pelo automato.")
-            return
-               
-      if estadoAtual in self.estadosFinais:
-         print ("A sentenca '" + sentenca + "' foi reconhecida pelo automato com estado final " + estadoAtual + ".")
-      else:
-         print ("A sentenca '" + sentenca + "' nao foi reconhecida pelo automato.")
+		estadoAtual = self.estadoInicial
+
+		for simbolo in sentenca:
+			try:
+				estadoAtual = self.transicao[estadoAtual][simbolo]
+			except KeyError:
+				print ("A sentenca '" + sentenca + "' nao foi reconhecida pelo automato.")
+				return
+
+		if estadoAtual in self.estadosFinais:
+			print ("A sentenca '" + sentenca + "' foi reconhecida pelo automato com estado final " + estadoAtual + ".")
+		else:
+			print ("A sentenca '" + sentenca + "' nao foi reconhecida pelo automato.")

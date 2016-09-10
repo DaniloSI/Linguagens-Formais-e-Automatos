@@ -1,8 +1,6 @@
-a,b
-q0,q1,q2,qf
 q0
 qf
 q0,a-q0-q1,b-q0
 q1,a-q2
 q2,a-qf
-abababbaaababababbbbababababaaaaaaaaaaaaaaaaaaaaaaaabababababbaaaabaaa
+qf

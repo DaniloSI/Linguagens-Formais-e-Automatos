@@ -1,22 +1,29 @@
 
 
 class AFN:
-
 	
-	def __init__(self):
+	estadosCorrentes = set()
+	alfabeto = set()
+	estados = set()
+	estadosFinais = set()
+	estadoInicial = ""
+	palavra = ""
+	palavraInput = palavra
+	transicoes = {}
+	
+	def __init__(self, alfabeto=set(), estados=set(), estadosFinais=set(), estadoInicial="", palavra="", transicoes={}):
 		
-		self.estadosCorrentes = set()
-		self.alfabeto = set()
-		self.estados = set()
-		self.estadosFinais = set()
-		self.estadoInicial = ""
-		self.palavra = ""
-		self.palavraInput = self.palavra
-		self.transicoes = {}
+		self.alfabeto = alfabeto
+		self.estados = estados
+		self.estadosFinais = estadosFinais
+		self.estadoInicial = estadoInicial
+		self.palavra = palavra
+		self.palavraInput = palavra
+		self.transicoes = transicoes
+		self.estadosCorrentes.add(estadoInicial)
 	
 	
-	def executaAutomato(self, palavra):
-		self.palavraInput = self.palavra = palavra
+	def executaAutomato(self):
 		
 		# Verifica se o autômato tem que parar ou continuar
 		while (self.continua()):
@@ -26,7 +33,6 @@ class AFN:
 			
 			# Executa uma transição com o símbolo que foi lido
 			self.estadosCorrentes = self.executaTransicao(simboloLido)
-
 		
 		# Reconhece se a palavra é válida, caso um dos estados atuais do conjunto estadosCorrentes estiver contido no conjunto estadosFinais
 		if (len(self.estadosCorrentes.intersection(self.estadosFinais)) > 0):
@@ -72,33 +78,3 @@ class AFN:
 		self.palavra = self.palavra[1:]
 		
 		return simbolo
-	
-	def addEstado(self, nomeEstado, transicao, stInicial=False, stFinal=False):
-		
-		self.estados.add(nomeEstado)
-		self.alfabeto.union( set( transicao.keys() ) )
-		self.transicoes[nomeEstado] = transicao
-
-		if stInicial:
-			self.estadoInicial = nomeEstado
-			self.estadosCorrentes.add(nomeEstado)
-		
-		if stFinal:
-			self.estadosFinais.add(nomeEstado)
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
