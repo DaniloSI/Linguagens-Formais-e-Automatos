@@ -53,7 +53,6 @@ class FileReadAF:
 		
 		# Não pode existir o caractere espaço (" ") no arquivo. Abaixo, um exemplo de entrada válida:
 		'''
-		
 		a,b
 		q0,q1,q2,qf
 		q0
@@ -62,7 +61,6 @@ class FileReadAF:
 		q1,a-q2
 		q2,a-qf
 		abababbaaabababaaaaababbaaaabaaa
-		
 		'''
 		
 		# Primeira linha do arquivo é o alfabeto
