@@ -10,7 +10,7 @@ class DFA:
 		self.estadoInicial = ""
 		self.estadosFinais = set()
 
-	def addEstado(self, nomeEstado, transicao, stInic=0, stFinal=0):
+	def addEstado(self, nomeEstado, transicao, stInic=False, stFinal=False):
 	
 		self.estados.add(nomeEstado)
 		self.transicao[nomeEstado] = transicao

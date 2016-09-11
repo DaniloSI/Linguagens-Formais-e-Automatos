@@ -1,4 +1,4 @@
-
+from LibsAF.DFA import DFA
 
 class AFN:
 
@@ -76,7 +76,8 @@ class AFN:
 	def addEstado(self, nomeEstado, transicao, stInicial=False, stFinal=False):
 		
 		self.estados.add(nomeEstado)
-		self.alfabeto.union( set( transicao.keys() ) )
+		setSimbolos = set( transicao.keys() )
+		self.alfabeto = self.alfabeto.union( setSimbolos )
 		self.transicoes[nomeEstado] = transicao
 
 		if stInicial:
@@ -87,9 +88,39 @@ class AFN:
 			self.estadosFinais.add(nomeEstado)
 	
 	
-	
-	
-	
+	def toAFD(self):
+		
+		lstNomes = ["q0"]
+		lstEstados = [set(["q0"])]
+		afd = DFA()
+		
+		for setOfEstado in lstEstados:
+			transicao = {}
+			
+			for simbolo in self.alfabeto:
+				estadosDestino = set()
+
+				for estado in setOfEstado:
+					try:
+						estadosDestino = estadosDestino.union(self.transicoes[estado][simbolo])
+					except KeyError:
+						estadosDestino = estadosDestino.union(set())
+					
+				
+				if estadosDestino not in lstEstados:
+					lstNomes.append("q" + str(len(lstEstados)))
+					lstEstados.append(estadosDestino)
+				
+				transicao[simbolo] = lstNomes[lstEstados.index(estadosDestino)]
+			
+			estadoInicial = setOfEstado == lstEstados[0]
+			estadoFinal = len( setOfEstado.intersection(self.estadosFinais) ) > 0
+			
+			afd.addEstado(lstNomes[lstEstados.index(setOfEstado)], transicao, stInic=estadoInicial, stFinal=estadoFinal)
+		
+		return afd
+
+
 	
 	
 	
