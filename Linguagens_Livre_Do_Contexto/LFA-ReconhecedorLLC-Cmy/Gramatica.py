@@ -48,16 +48,3 @@ class Gramatica:
     def get_variavel_partida(self):
         return self.variavel_partida
 
-
-# def main():
-#
-#     gramatica = Gramatica("{S->AA|AS|b,A->AS|SA|a}")
-#
-#     gramatica.print_gramatica()
-#
-#     print( gramatica.get_left_side_production("AA") )
-#
-#     return 0
-#
-# if __name__ == "__main__":
-#     main()

@@ -57,20 +57,3 @@ class MatrixCmy:
                 cartesian_product.append( variavel_one + variavel_two )
 
         return cartesian_product
-
-
-
-
-# def main():
-#     gramatica = Gramatica("{S->AA|AS|b,A->AS|SA|a}")
-#
-#     matrix_cmy = MatrixCmy("aabbaa", gramatica)
-#
-#     matrix_cmy.generate_matrix()
-#
-#     print( matrix_cmy.palavra_valida() )
-#
-#     return 0
-#
-# if __name__ == "__main__":
-#     main()
