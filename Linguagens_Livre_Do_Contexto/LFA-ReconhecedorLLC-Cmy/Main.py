@@ -5,9 +5,13 @@ from MatrixCmy import MatrixCmy
 # Testa se uma palavra eh aceita por uma determinada GLC
 class TesteGLC:
 
-    def __init__(self, str_word, str_gramatica):
+    def __init__(self, str_word, *producoes):
         # Cria a gramatica.
-        self.gramatica = Gramatica(str_gramatica)
+        self.gramatica = Gramatica()
+
+        # Quando utiliza-se *producoes, recebido uma lista de argumentos. Eh permitido passar qualquer quantidade de parametros.
+        for producao in producoes:
+            self.gramatica.set_producao( producao )
 
         # Cria a matrix Cmy a partir da gramatica.
         self.matrix = MatrixCmy(str_word, self.gramatica)
@@ -23,12 +27,49 @@ class TesteGLC:
 
 def main():
 
-    TesteGLC("abaab", "{S -> AA | AS | b, A -> AS | AS | SA | a}").testar(True)
-    TesteGLC("abbabba", "{S -> SF | a, A -> CC | SS | CS, C-> b, F -> AS}").testar(True)
-    TesteGLC("abaab", "{S -> AA | AS | b, A -> AS | SA | a}").testar(True)
-    TesteGLC("aabbaa", "{S -> AA | AS | b, A -> AS | SA | a}").testar(True)
+    TesteGLC("abaab",
+             "S -> AA",
+             "S -> AS",
+             "S -> b",
+             "A -> AS",
+             "A -> AS",
+             "A -> SA",
+             "A -> a").testar(True)
 
-    TesteGLC("aaabbabaaaabba", "S->SF|a, A->CG|SS|CS, C -> b, F -> AS, G -> CA").testar(False)
+    TesteGLC("abbabba",
+             "S -> SF",
+             "S -> a",
+             "A -> CC",
+             "A -> SS",
+             "A -> CS",
+             "C-> b",
+             "F -> AS").testar(True)
+
+    TesteGLC("abaab",
+             "S -> AA",
+             "S -> AS",
+             "S -> b",
+             "A -> AS",
+             "A -> SA",
+             "A -> a").testar(True)
+
+    TesteGLC("aabbaa",
+             "S -> AA",
+             "S -> AS",
+             "S -> b",
+             "A -> AS",
+             "A -> SA",
+             "A -> a").testar(True)
+
+    TesteGLC("aaabbabaaaabba",
+             "S -> SF",
+             "S -> a",
+             "A->CG",
+             "A-> SS",
+             "A-> CS",
+             "C -> b",
+             "F -> AS",
+             "G -> CA").testar(False)
 
     return 0
 

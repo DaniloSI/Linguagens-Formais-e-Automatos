@@ -1,32 +1,33 @@
 
 class Gramatica:
 
-    def __init__(self, str_producoes):
-        self.dicionario_producoes = {}
+    def __init__(self):
+        self.dicionario_producoes = dict()
         self.terminais = set()
         self.variaveis = set()
-        self.variavel_partida = ""
-        self.str_producoes = ""
+        self.variavel_partida = str()
 
-        # Retira o {} da string recebida e retira espaços em branco ou \n, caso tenha.
-        str_producoes = str_producoes.strip("{ }").replace(" ", "").replace("\n", "")
-        self.str_producoes = str_producoes
+
+    def set_producao(self, str_producao):
+
+        str_producao = str_producao.replace(" ", "").replace("\n", "")
 
         # Define a primeira variavel das producoes como variavel de partida.
-        self.variavel_partida = str_producoes[0]
+        if len(self.dicionario_producoes) == 0:
+            self.variavel_partida = str_producao[0]
 
-        for producao in str_producoes.split(","):
-            variavel = producao.split("->")[0]
-            producoes = set( producao.split("->")[1].split("|") )
+        variavel = str_producao.split("->")[0]
+        producao = str_producao.split("->")[1]
 
-            # Como esta na forma de chomsky, a gramatica esta simplificada e toda variavel gera um terminal.
-            self.variaveis.add( variavel )
+        if not( self.dicionario_producoes.__contains__(variavel) ):
+            self.dicionario_producoes[variavel] = set()
 
-            for simbolo in producoes:
-                if simbolo == simbolo.lower():
-                    self.terminais.add( simbolo )
+        self.dicionario_producoes[variavel].add(producao)
+        self.variaveis.add( variavel )
 
-            self.dicionario_producoes[variavel] = producoes
+        if len(producao) == 1:
+            self.terminais.add( producao )
+
 
     def print_gramatica(self):
         print( "Variaveis: " + str(self.variaveis) )
