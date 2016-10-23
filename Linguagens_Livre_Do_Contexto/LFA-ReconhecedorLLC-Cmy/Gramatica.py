@@ -44,9 +44,9 @@ class Gramatica:
         return self.variavel_partida
 		
 
-    def print_gramatica(self):
-        print( "Variaveis: " + str(self.variaveis) )
-        print( "Terminais: " + str(self.terminais) )
-        print( "Variavel de partida: " + self.variavel_partida )
-        print( "Producoes: " + str(self.producoes))
+    def __str__(self):
+        return ( "Variaveis: " + str(self.variaveis) +
+                 "\nTerminais: " + str(self.terminais) +
+                 "\nVariavel de partida: " + self.variavel_partida +
+                 "\nProducoes: " + str(self.producoes) )
 
