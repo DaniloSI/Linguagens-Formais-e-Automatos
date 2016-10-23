@@ -29,12 +29,6 @@ class Gramatica:
             self.terminais.add( producao )
 
 
-    def print_gramatica(self):
-        print( "Variaveis: " + str(self.variaveis) )
-        print( "Terminais: " + str(self.terminais) )
-        print( "Variavel de partida: " + self.variavel_partida )
-        print( "Producoes: " + str(self.producoes))
-
     # Retorna o lado esquerdo da producao a partir uma das producoes do lado direito
     def get_left_side_production(self, str_right_side_production):
         set_left_side_production = set()
@@ -48,4 +42,11 @@ class Gramatica:
     # Retorna a variavel de partida
     def get_variavel_partida(self):
         return self.variavel_partida
+		
+
+    def print_gramatica(self):
+        print( "Variaveis: " + str(self.variaveis) )
+        print( "Terminais: " + str(self.terminais) )
+        print( "Variavel de partida: " + self.variavel_partida )
+        print( "Producoes: " + str(self.producoes))
 
