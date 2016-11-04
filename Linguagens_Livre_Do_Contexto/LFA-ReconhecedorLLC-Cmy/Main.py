@@ -8,6 +8,7 @@ class TesteGLC:
     def __init__(self, str_word, *producoes):
         # Cria a gramatica.
         self.gramatica = Gramatica()
+        self.word = str_word
 
         # Quando utiliza-se *producoes, recebido uma lista de argumentos. Eh permitido passar qualquer quantidade de parametros.
         for producao in producoes:
@@ -16,14 +17,20 @@ class TesteGLC:
         # Cria a matrix Cmy a partir da gramatica.
         self.matrix = MatrixCmy(str_word, self.gramatica)
 
-    def testar(self, resultado_esperado):
+    def testar(self):
         self.matrix.generate_matrix()
 
-        if self.matrix.palavra_valida() == resultado_esperado:
-            print("Ok!")
+        if self.matrix.palavra_valida():
+            palavra_valida = "SIM"
 
         else:
-            print("Wrong!")
+            palavra_valida = "NAO"
+
+        print("--- Gramatica ---")
+        print(str(self.gramatica) + "\n")
+        print("Palavra lida: " + self.word + "\n")
+        print("Palavra valida ? Resposta: " + palavra_valida + "\n\n")
+
 
 def main():
 
@@ -34,7 +41,7 @@ def main():
              "A -> AS",
              "A -> AS",
              "A -> SA",
-             "A -> a").testar(True)
+             "A -> a").testar()
 
     TesteGLC("abbabba",
              "S -> SF",
@@ -43,7 +50,7 @@ def main():
              "A -> SS",
              "A -> CS",
              "C-> b",
-             "F -> AS").testar(True)
+             "F -> AS").testar()
 
     TesteGLC("abaab",
              "S -> AA",
@@ -51,7 +58,7 @@ def main():
              "S -> b",
              "A -> AS",
              "A -> SA",
-             "A -> a").testar(True)
+             "A -> a").testar()
 
     TesteGLC("aabbaa",
              "S -> AA",
@@ -59,7 +66,7 @@ def main():
              "S -> b",
              "A -> AS",
              "A -> SA",
-             "A -> a").testar(True)
+             "A -> a").testar()
 
     TesteGLC("aaabbabaaaabba",
              "S -> SF",
@@ -69,7 +76,7 @@ def main():
              "A-> CS",
              "C -> b",
              "F -> AS",
-             "G -> CA").testar(False)
+             "G -> CA").testar()
 
     return 0
 
