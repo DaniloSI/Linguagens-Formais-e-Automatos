@@ -5,13 +5,13 @@ from MatrixCmy import MatrixCmy
 # Testa se uma palavra eh aceita por uma determinada GLC
 class TesteGLC:
 
-    def __init__(self, str_word, *producoes):
+    def __init__(self, str_word, list_producoes):
         # Cria a gramatica.
         self.gramatica = Gramatica()
         self.word = str_word
 
         # Quando utiliza-se *producoes, recebido uma lista de argumentos. Eh permitido passar qualquer quantidade de parametros.
-        for producao in producoes:
+        for producao in list_producoes:
             self.gramatica.set_producao( producao )
 
         # Cria a matrix Cmy a partir da gramatica.
@@ -32,51 +32,27 @@ class TesteGLC:
         print("Palavra valida ? Resposta: " + palavra_valida + "\n\n")
 
 
+def read_file_productions(str_file):
+    list_producoes = list()
+    
+    arquivo = open(str_file, 'r')
+    
+    producao = arquivo.readline()
+    while producao != "":
+        list_producoes.append( producao.strip("\n") )
+        
+        producao = arquivo.readline()
+    
+    return list_producoes
+    
+    
+
 def main():
 
-    TesteGLC("abaab",
-             "S -> AA",
-             "S -> AS",
-             "S -> b",
-             "A -> AS",
-             "A -> AS",
-             "A -> SA",
-             "A -> a").testar()
-
-    TesteGLC("abbabba",
-             "S -> SF",
-             "S -> a",
-             "A -> CC",
-             "A -> SS",
-             "A -> CS",
-             "C-> b",
-             "F -> AS").testar()
-
-    TesteGLC("abaab",
-             "S -> AA",
-             "S -> AS",
-             "S -> b",
-             "A -> AS",
-             "A -> SA",
-             "A -> a").testar()
-
-    TesteGLC("aabbaa",
-             "S -> AA",
-             "S -> AS",
-             "S -> b",
-             "A -> AS",
-             "A -> SA",
-             "A -> a").testar()
-
-    TesteGLC("aaabbabaaaabba",
-             "S -> SF",
-             "S -> a",
-             "A->CG",
-             "A-> SS",
-             "A-> CS",
-             "C -> b",
-             "F -> AS",
-             "G -> CA").testar()
+    word = input("Entre com a palavra: ")
+    path_file = input("Entre com o caminho completo do arquivo incluindo o arquivo: ")
+    
+    TesteGLC(word, read_file_productions(path_file) ).testar()
 
     return 0
 
