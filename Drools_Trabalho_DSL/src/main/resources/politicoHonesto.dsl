@@ -1,5 +1,5 @@
 [condition][]Existe um ou mais politicos honestos=exists( Politico( honesto == true ) )
-[condition][]Se existir uma esperanca=exists( Esperanca() )
+[condition][]Existir uma esperanca=exists( Esperanca() )
 [condition][]Se nao existir uma esperanca=not( Esperanca() )
 [condition][]Houver um conjunto de politicos honestos=$politico : Politico( honesto == true )
 
