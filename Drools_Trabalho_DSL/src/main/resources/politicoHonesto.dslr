@@ -1,0 +1,35 @@
+import dominio.Politico;
+import dominio.Esperanca;
+
+expander pH.dsl
+
+rule "Nos temos um politico honesto"
+    salience 10
+    when
+        Existe um ou mais politicos honestos
+    then
+        Existe uma experanca
+end
+
+rule "A esperanca vive"
+    salience 10
+    when
+        Se existir uma esperanca
+    then
+        Diga que a esperanca esta viva
+end
+
+rule "A esperanca esta morta"
+    when
+        Se nao existir uma esperanca
+    then
+        Diga que a democracia esta morta
+end
+
+rule "Corrompe o(s) honesto(s)"
+    when
+        Houver um conjunto de politicos honestos
+        Se existir uma esperanca
+    then
+        A corporacao do mal corrompe os politicos
+end

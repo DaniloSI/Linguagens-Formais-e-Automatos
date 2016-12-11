@@ -42,7 +42,10 @@ public class PoliticoHonestoExemplo {
 
     public static KnowledgeBase readKnowledgeBase() {
         KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-        kbuilder.add(ResourceFactory.newClassPathResource("politicoHonesto.drl"), ResourceType.DRL);
+
+        kbuilder.add(ResourceFactory.newClassPathResource("politicoHonesto.dsl"), ResourceType.DSL);
+        kbuilder.add(ResourceFactory.newClassPathResource("politicoHonesto.dslr"), ResourceType.DSLR);
+
         KnowledgeBuilderErrors errors = kbuilder.getErrors();
 
         if (errors.size() > 0) {
@@ -73,6 +76,8 @@ public class PoliticoHonestoExemplo {
         ksession.insert( p4 );
 
         ksession.fireAllRules();
+
+        ksession.dispose();
     }
 
 }
