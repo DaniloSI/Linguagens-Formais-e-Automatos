@@ -1,7 +1,6 @@
 import dominio.Politico;
 import dominio.Esperanca;
 
-expander pH.dsl
 
 rule "Nos temos um politico honesto"
     salience 10
