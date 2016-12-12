@@ -12,12 +12,11 @@ import org.drools.runtime.StatefulKnowledgeSession;
 public class PoliticoHonestoExemplo {
 
     public static void main(final String[] args) {
+        
         try {
-
             KnowledgeBase kbase = readKnowledgeBase();
 
             execute(kbase);
-
         }
         catch (Throwable t) {
             t.printStackTrace();
