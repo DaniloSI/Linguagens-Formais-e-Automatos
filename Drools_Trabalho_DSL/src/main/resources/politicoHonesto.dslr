@@ -20,7 +20,7 @@ end
 
 rule "A esperanca esta morta"
     when
-        Se nao existir uma esperanca
+        Nao existir uma esperanca
     then
         Diga que a democracia esta morta
 end
